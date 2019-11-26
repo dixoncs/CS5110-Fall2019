@@ -18,7 +18,7 @@ public class FibonacciHeap
     /**
      * Adds a new 1 element heap into the root-list.
      */
-    public insert()
+    public void insert()
     {
         System.out.println("This is a method");
     }
@@ -26,16 +26,17 @@ public class FibonacciHeap
     /**
      * Links together the root-lists of the two heaps.
      */
-    public merge()
+    public boolean merge()
     {
         System.out.println("This is a method");
+        return false;
     }
     
     /**
      * Joins equal-ranked trees in the root-list to ensure only one tree of 
      * each rank remains.
      */
-    public consolidate()
+    public void consolidate()
     {
         System.out.println("This is a method");
     }
@@ -44,7 +45,16 @@ public class FibonacciHeap
      * Removes the minimum ... from the tree.
      * O(log n) time
      */
-    public remove_min()
+    public boolean remove_min()
+    {
+        System.out.println("This is a method");
+        return false;
+    }
+ 
+    /**
+     *
+     */
+    public void decrease_key()
     {
         System.out.println("This is a method");
     }
@@ -52,15 +62,7 @@ public class FibonacciHeap
     /**
      *
      */
-    public decrease_key()
-    {
-        System.out.println("This is a method");
-    }
- 
-    /**
-     *
-     */
-    public delete()
+    public void delete()
     {
         System.out.println("This is a method");
     }
@@ -68,7 +70,7 @@ public class FibonacciHeap
     /**
      *
      */
-    public increase_key()
+    public void increase_key()
     {
         System.out.println("This is a method");
     }   
@@ -76,7 +78,7 @@ public class FibonacciHeap
     /**
      *
      */
-    public sift_up()
+    public void sift_up()
     {
         System.out.println("This is a method");
     }
@@ -84,7 +86,7 @@ public class FibonacciHeap
     /**
      *
      */
-    public sift_down()
+    public void sift_down()
     {
         System.out.println("This is a method");
     }
