@@ -295,9 +295,9 @@ public class FibonacciHeap
         System.out.println(tree);
     }
 
-    public static void main( String[] args) {
-        System.out.println("Creating Fibonacci Heap");
-        FibonacciHeap fh = new FibonacciHeap();
+    public void test1(FibonacciHeap fh)
+    {
+        System.out.println("Running test 1");
         Node n1 = new Node(6);
         Node n2 = new Node(4);
         Node n3 = new Node(8);
@@ -341,6 +341,62 @@ public class FibonacciHeap
         System.out.println("The new min should be null. Min is: " + fh.findMin());
         fh.displayHeap();
         System.out.println("-----------------------------------------------------\n");
+    }
+
+    public void test2(FibonacciHeap fh)
+    {
+        System.out.println("Running test 2");
+        Node n1 = new Node(6);
+        Node n2 = new Node(4);
+        Node n3 = new Node(8);
+        fh.insert(n1);
+        fh.insert(n2);
+        fh.insert(n3);
+          
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing insert. Heap should contain 4,6,8");
+        fh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Decreasing key of n2 (4) to 3");
+        fh.decreaseKey(n2, 3);
+        fh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println(("Testing find min. Should return 3"));
+        System.out.println(fh.findMin().key);
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing delete min. Heap should contain 6,8");
+        fh.deleteMin();
+        System.out.println("The new min should be 6. Min is: " + fh.findMin().key);
+        fh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing delete on 8. Heap should contain 6");
+        fh.delete(n3);
+        System.out.println("The new min should be 6. Min is: " + fh.findMin().key);
+        fh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing delete on 6. Heap should contain nothing.");
+        fh.delete(n2);
+        System.out.println("The new min should be null. Min is: " + fh.findMin());
+        fh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+    }
+    public static void main( String[] args) {
+        System.out.println("Creating Fibonacci Heap");
+        FibonacciHeap fh = new FibonacciHeap();
+     
+        fh.test1(fh);
+        fh.test2(fh);
+
     }
 
 }
