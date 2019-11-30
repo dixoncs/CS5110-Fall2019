@@ -16,6 +16,54 @@ public class HollowHeap
     }
 
     /**
+     *
+     */
+    //public ()
+    //{
+    //    return -1;
+    //}
+    
+   /**
+     *
+     */
+    //public ()
+    //{
+    //    return -1;
+    //} 
+    
+    /**
+     *
+     */
+    //public ()
+    //{
+    //    return -1;
+    //}
+
+    /**
+     *
+     */
+    //public ()
+    //{
+    //    return -1;
+    //}
+
+    /**
+     *
+     */
+    //public ()
+    //{
+    //    return -1;
+    //}
+
+    /**
+     *
+     */
+    //public ()
+    //{
+    //    return -1;
+    //}
+
+    /**
      * Main method.
      * @param args command-line arguments
      */
