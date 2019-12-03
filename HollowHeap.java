@@ -6,13 +6,14 @@ import java.util.*;
  * This is our attempt to implement the TWO-PARENT HOLLOW HEAP data
  * structure introduced by Hansen, Kaplan, Tarjan, and Zwick.
  * 
- * @authors Courtney Dixon and Alisha Sprinkle
+ * @author Courtney Dixon and Alisha Sprinkle
  * @version 11/9/2019
  */
 public class HollowHeap {
-    
+
     private int maxRank;
-    
+    private HollowNode[] ah;
+
     /**
      * Constructor.
      */
@@ -20,6 +21,7 @@ public class HollowHeap {
         System.out.println("Hello, Hollow Heap!");
         maxRank = 0;
         makeHeap();
+        ah = new HollowNode[];
     }
 
     /**
@@ -34,6 +36,9 @@ public class HollowHeap {
     /**
      * Inserts into the hollow heap.
      *
+     * @param e a thing
+     * @param key a thing
+     * @param h a thing
      * @return meld
      */
     public HollowHeap insert(HollowNode e, int key, HollowHeap h) {
@@ -43,6 +48,8 @@ public class HollowHeap {
     /**
      * Melds hollow heaps g and h.
      *
+     * @param g a thing
+     * @param h a thing
      * @return link
      */
     public HollowHeap meld(HollowHeap g, HollowHeap h) {
@@ -58,6 +65,7 @@ public class HollowHeap {
     /**
      * Finds the minimum element in the h heap.
      *
+     * @param h a thing
      * @return item
      */
     public int findMin(HollowHeap h) {
@@ -72,6 +80,9 @@ public class HollowHeap {
     /**
      * Decreases the key of an element in the hollow heap.
      *
+     * @param e a thing
+     * @param key a thing
+     * @param h a thing
      * @return link
      */
     public HollowHeap decreaseKey(HollowNode e, int key, HollowHeap h) {
@@ -87,12 +98,13 @@ public class HollowHeap {
         }
         v.child = u;
         u.ep = v;
-        return link(v, h)
+        return link(v, h);
     }
 
     /**
      * Deletes the minimum element in the hollow heap.
      *
+     * @param h a thing
      * @return delete
      */
     public HollowHeap deleteMin(HollowHeap h) {
@@ -101,6 +113,10 @@ public class HollowHeap {
 
     /**
      * Deletes element from the hollow heap.
+     *
+     * @param e a thing
+     * @param h a thing
+     * @return h a thing
      */
     public HollowHeap delete(HollowNode e, HollowHeap h) {
         e.node.item = null;
@@ -130,25 +146,25 @@ public class HollowHeap {
                         u.next = h;       
                         h = u;
                     }
+                    else {
+                        /* u has two parents */
+                        if (u.ep = v) {
+                            /* v is the second parent */
+                            w = null;       
+                        }
+                        else {
+                            /* v is the first parent */
+                            u.next = null;      
+                        }
+                        u.ep = null;
+                    }
                 }
                 else {
-                    /* u has two parents */
-                    if (u.ep = v) {
-                        /* v is the second parent */
-                        w = null;       
-                    }
-                    else {
-                        /* v is the first parent */
-                        u.next = null;      
-                    }
-                    u.ep = null;
+                    /* u is full */
+                    doRankedLinks();
                 }
+                destroy v;
             }
-            else {
-            /* u is full */
-                doRankedLinks();
-            }
-            destroy v;
         }
         doUnrankedLinks();
         return h;
@@ -190,6 +206,9 @@ public class HollowHeap {
     /**
      * Makes a new node.
      *      an "auxiliary method" 
+     * 
+     * @param e a thing
+     * @param key a thing
      * @return newNode
      */
     public HollowNode makeNode(HollowNode e, int key) {
@@ -207,9 +226,12 @@ public class HollowHeap {
     /**
      * Links things in a hollow heap.
      *      an "auxiliary method" 
-     * @return w
+     *
+     * @param v a thing
+     * @param w a thing
+     * @return w or v 
      */
-    public HollowHeap link(v, w) {
+    public HollowNode link(HollowNode v, HollowNode w) {
         if (v.key >= w.key) {
             addChild(v, w);
             return w;
@@ -223,20 +245,22 @@ public class HollowHeap {
     /**
      * Adds a child to the hollow heap.
      *      an "auxiliary method" 
-     * @param v
-     * @param w
+     * 
+     * @param v a thing
+     * @param w a thing
      */
-    public void addChild(v, w) {
+    public void addChild(HollowNode v, HollowNode w) {
         v.next = w.child;
         w.child = v;
     }
 
     /**
      * Main method.
+     *
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-         HollowHeap testHollowHeap = new HollowHeap();
+        HollowHeap testHollowHeap = new HollowHeap();
     }
 }
 

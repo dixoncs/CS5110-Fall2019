@@ -13,7 +13,7 @@ public class HeapDriver {
      */
     public static void main(String[] args) {
         FibonacciHeap testFibHeap = new FibonacciHeap();
-        HollowHeap testHollowHeap = new HollowHeap();
+        //HollowHeap testHollowHeap = new HollowHeap();
     }
 }
 

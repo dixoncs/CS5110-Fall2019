@@ -75,7 +75,7 @@ public class Node {
      * ?? THIS IS NOT A FIELD HERE ??
      * @return value not sure???
      */
-    public int getValue() {
+    /*public int getValue() {
         return this.value;
-    }
+    }*/
 }

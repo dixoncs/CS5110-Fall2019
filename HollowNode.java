@@ -8,19 +8,19 @@ import java.util.*;
  */
 public class  HollowNode {
     
-    private int key;
-    private int rank;
+    int key;
+    int rank;
     //private <DATA TYPE> item;     ??? not sure about this one yet maybe a HollowNode as well
-    private HollowNode ep;
-    private HollowNode child;
-    private HollowNode next;
-    private HollowNode node;    
+    HollowNode ep;
+    HollowNode child;
+    HollowNode next;
+    HollowNode node;    
     
     /**
      * No-arg Constructor.
      */
     public HollowNode() {
-        return new HollowNode();
+        HollowNode hugh = new HollowNode();
     } 
 
 }

@@ -23,7 +23,7 @@ public class HeapDriverTest {
         try {
             d = Class.forName("HeapDriver");
             f = Class.forName("FibonacciHeap");
-            h = Class.forName("HollowHeap");
+            //h = Class.forName("HollowHeap");
         } 
         catch (Exception e) {
             fail("Did you name the classes correctly? " + e);
@@ -46,7 +46,7 @@ public class HeapDriverTest {
     /**
     * Tests HollowHeap constructor.
     */
-    @Test
+    /*@Test
     public void testHollowHeapConstructor() {
         try {
             HollowHeap hHeap = new HollowHeap();
@@ -54,7 +54,10 @@ public class HeapDriverTest {
         catch (Exception ex) {
             fail("Constructor did not work. " + ex);
         }
-    }
+    }*/
+
+
+
 
     /**
     * Tests a method that builds something.
