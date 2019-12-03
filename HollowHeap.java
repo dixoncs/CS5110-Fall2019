@@ -9,17 +9,17 @@ import java.util.*;
  * @authors Courtney Dixon and Alisha Sprinkle
  * @version 11/9/2019
  */
-public class HollowHeap
-{
+public class HollowHeap {
+    
     private int maxRank;
     
     /**
      * Constructor.
      */
-    public HollowHeap()
-    {
+    public HollowHeap() {
         System.out.println("Hello, Hollow Heap!");
         maxRank = 0;
+        makeHeap();
     }
 
     /**
@@ -27,8 +27,7 @@ public class HollowHeap
      *
      * @return null
      */
-    public HollowHeap makeHeap()
-    {
+    public HollowHeap makeHeap() {
         return null;
     }
 
@@ -37,9 +36,8 @@ public class HollowHeap
      *
      * @return meld
      */
-    public HollowHeap insert( e, k, h)
-    {
-        return meld(make_node(e, K), h);
+    public HollowHeap insert(HollowNode e, int key, HollowHeap h) {
+        return meld(makeNode(e, key), h);
     }
 
     /**
@@ -47,32 +45,26 @@ public class HollowHeap
      *
      * @return link
      */
-    public HollowHeap meld(HollowHeap g, HollowHeap h)
-    {
-        if (g == null)
-        {
+    public HollowHeap meld(HollowHeap g, HollowHeap h) {
+        if (g == null) {
             return h;
         }
-        if (h == null)
-        {
+        if (h == null) {
             return g;
         }
         return link(g, h);
     } 
 
     /**
-     * Finds the minimum element in the hollow heap.
+     * Finds the minimum element in the h heap.
      *
      * @return item
      */
-    public String findMin(h)
-    {
-        if (h == null)
-        {
+    public int findMin(HollowHeap h) {
+        if (h == null) {
             return null;
         }
-        else
-        {
+        else {
             return h.item;
         }
     }
@@ -82,18 +74,15 @@ public class HollowHeap
      *
      * @return link
      */
-    public HollowHeap decreaseKey(e, k, h)
-    {
+    public HollowHeap decreaseKey(HollowNode e, int key, HollowHeap h) {
         u = e.node;
-        if (u == h)
-        {
+        if (u == h) {
             u.key = k;
             return h;
         }
         v = makeNode(e, k);
         u.item = null;
-        if (u.rank > 2)
-        {
+        if (u.rank > 2) {
             v.rank = u.rank - 2;
         }
         v.child = u;
@@ -106,55 +95,57 @@ public class HollowHeap
      *
      * @return delete
      */
-    public HollowHeap deleteMin(h)
-    {
+    public HollowHeap deleteMin(HollowHeap h) {
         return delete(h.item, h);
     }
 
     /**
      * Deletes element from the hollow heap.
      */
-    public HollowHeap delete(e, h)
-    {
+    public HollowHeap delete(HollowNode e, HollowHeap h) {
         e.node.item = null;
         e.node = null;
-        if (h.item != null)
-        {
-            return h;           /* Non-minimum deletion */
+        if (h.item != null) {
+            /* Non-minimum deletion */
+            return h;           
         }
         maxRank = 0;
-        while (h != null)       /* While L not empty */
-        {
+
+        /* While L not empty */
+        while (h != null) {
             w = h.child;
             v = h;
             h = h.next;
-            while (w != null)
-            {
+            while (w != null) {
                 u = w;
                 w = w.next;
-                if (u.item = null)        /* u is hollow */
-                {
-                    if (u.ep = null)      /* v is the only parent */
-                    {
-                        u.next = h;       /* add u to L */
+
+                /* u is hollow */
+                if (u.item = null) {
+
+                    /* v is the only parent */
+                    if (u.ep = null) {
+
+                        /* add u to L */
+                        u.next = h;       
                         h = u;
                     }
                 }
-                else        /* u has two parents */
-                {
-                    if (u.ep = v)
-                    {
-                        w = null;       /* v is the second parent */
+                else {
+                    /* u has two parents */
+                    if (u.ep = v) {
+                        /* v is the second parent */
+                        w = null;       
                     }
-                    else
-                    {
-                        u.next = null;      /* v is the first parent */
+                    else {
+                        /* v is the first parent */
+                        u.next = null;      
                     }
                     u.ep = null;
                 }
             }
-            else        /* u is full */
-            {
+            else {
+            /* u is full */
                 doRankedLinks();
             }
             destroy v;
@@ -165,18 +156,16 @@ public class HollowHeap
 
     /**
      * Does ranked links.
+     * @param u a hollow node maybe?
      */
-    public void doRankedLinks(u)
-    {
-        while (A[u.rank] != null)
-        {
+    public void doRankedLinks(HollowNode u) {
+        while (A[u.rank] != null) {
             u = link(u, A[u.rank]);
             A[u.rank] = null;
             u.rank = u.rank + 1;
         }
         A[u.rank] = u;
-        if (u.rank > maxRank)
-        {
+        if (u.rank > maxRank) {
             maxRank = u.rank;
         }
     }
@@ -184,18 +173,13 @@ public class HollowHeap
     /**
      * Does unranked links.
      */
-    public void doUnrankedLinks()
-    {
-        for (int i = 0; i < maxRank; i++)
-        {
-            if (A[i] != null)
-            {
-                if (h = null)
-                {
+    public void doUnrankedLinks() {
+        for (int i = 0; i < maxRank; i++) {
+            if (A[i] != null) {
+                if (h = null) {
                     h = A[i];
                 }
-                else
-                {
+                else {
                     h = link(h, A[i]);
                 }
                 A[i] = null;
@@ -208,17 +192,16 @@ public class HollowHeap
      *      an "auxiliary method" 
      * @return newNode
      */
-    public makeNode(e, k)
-    {
-        u = newNode();
+    public HollowNode makeNode(HollowNode e, int key) {
+        u = new HollowNode();
         u.item = e;
         e.node = u;
         u.child = null;
-        u.next = nulll;
+        u.next = null;
         u.ep = null;
         u.key = k;
         u.rank = 0;
-        return u
+        return u;
     }
 
     /**
@@ -226,15 +209,12 @@ public class HollowHeap
      *      an "auxiliary method" 
      * @return w
      */
-    public HollowHeap link(v, w)
-    {
-        if (v.key >= w.key)
-        {
+    public HollowHeap link(v, w) {
+        if (v.key >= w.key) {
             addChild(v, w);
             return w;
         }
-        else
-        {
+        else {
             addChild(w, v);
             return v;
         }
@@ -246,8 +226,7 @@ public class HollowHeap
      * @param v
      * @param w
      */
-    public addChild(v, w)
-    {
+    public void addChild(v, w) {
         v.next = w.child;
         w.child = v;
     }
@@ -256,8 +235,7 @@ public class HollowHeap
      * Main method.
      * @param args command-line arguments
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
          HollowHeap testHollowHeap = new HollowHeap();
     }
 }
