@@ -12,7 +12,8 @@ import java.util.*;
 public class HollowHeap {
     
     private int maxRank;
-    
+    private HollowNode[] A;
+     
     /**
      * Constructor.
      */
@@ -20,6 +21,7 @@ public class HollowHeap {
         System.out.println("Hello, Hollow Heap!");
         maxRank = 0;
         makeHeap();
+        A = new HollowNode[];
     }
 
     /**
@@ -87,7 +89,7 @@ public class HollowHeap {
         }
         v.child = u;
         u.ep = v;
-        return link(v, h)
+        return link(v, h);
     }
 
     /**
@@ -130,25 +132,25 @@ public class HollowHeap {
                         u.next = h;       
                         h = u;
                     }
+                    else {
+                        /* u has two parents */
+                        if (u.ep = v) {
+                            /* v is the second parent */
+                            w = null;       
+                        }
+                        else {
+                            /* v is the first parent */
+                            u.next = null;      
+                        }
+                        u.ep = null;
+                    }
                 }
                 else {
-                    /* u has two parents */
-                    if (u.ep = v) {
-                        /* v is the second parent */
-                        w = null;       
-                    }
-                    else {
-                        /* v is the first parent */
-                        u.next = null;      
-                    }
-                    u.ep = null;
+                    /* u is full */
+                    doRankedLinks();
                 }
+                destroy v;
             }
-            else {
-            /* u is full */
-                doRankedLinks();
-            }
-            destroy v;
         }
         doUnrankedLinks();
         return h;
@@ -209,7 +211,7 @@ public class HollowHeap {
      *      an "auxiliary method" 
      * @return w
      */
-    public HollowHeap link(v, w) {
+    public HollowNode link(HollowNode v, HollowNode w) {
         if (v.key >= w.key) {
             addChild(v, w);
             return w;
@@ -226,7 +228,7 @@ public class HollowHeap {
      * @param v
      * @param w
      */
-    public void addChild(v, w) {
+    public void addChild(HollowNode v, HollowNode w) {
         v.next = w.child;
         w.child = v;
     }
