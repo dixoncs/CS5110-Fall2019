@@ -21,20 +21,20 @@ compile: HeapDriver.java HeapDriverTest.java $(JUNIT5_JAR)
 	javac FibonacciHeap.java
 #	javac HollowHeap.java
 	javac HeapDriver.java
-	javac -cp .:$(JUNIT5_JAR) HeapDriverTest.java
+	@javac -cp .:$(JUNIT5_JAR) HeapDriverTest.java
 
 test: $(JUNIT5_JAR)
-	java -cp .:$(JUNIT5_JAR) $(JUNIT5_RUNNER) --scan-class-path 
+	@java -cp .:$(JUNIT5_JAR) $(JUNIT5_RUNNER) --scan-class-path 
 
 check: 
-	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) *.java
+	@java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) *.java
 #	FibonacciHeap.java style.xml
 #	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) FibonacciHeap.java
 #	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) HollowHeap.java
 #	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) HeapDriver.java
 
 clean:
-	rm -f *.class
+	@rm -f *.class
 
 
 # MAKEFILE SYNTAX:
