@@ -1,23 +1,25 @@
 /**
- * Node class.
+ * FibonacciNode class.
  *
  * @author Alisha Sprinkle (primarily)
  * @author Courtney Dixon (checkstyle)
  * @version 11/9/2019
  */
-public class Node {
-    Node parent;
-    Node child;
-    Node left;
-    Node right;
+public class FibonacciNode {
+    FibonacciNode parent;
+    FibonacciNode child;
+    FibonacciNode left;
+    FibonacciNode right;
     int key;
     int degree;
     boolean marked;
 
     /**
      * No-arg Constructor.
+     * Sets all values to null.
+     * Initially a node will be marked as false
      */
-    public Node() {
+    public FibonacciNode() {
         parent = null;
         child = null;
         left = null;
@@ -29,9 +31,10 @@ public class Node {
 
     /**
      * One-arg Constructor.
-     * @param key nodes key
+     * Helps in cases where we need to create a new node with specific key
+     * @param key FibonacciNodes key
      */
-    public Node(int key) {
+    public FibonacciNode(int key) {
         parent = this;
         child = this;
         left = this;
@@ -43,15 +46,17 @@ public class Node {
 
     /**
      * Seven-arg Constructor.
-     * @param parent node's parent
-     * @param child node's child
-     * @param left node to node's left
-     * @param right node to node's right
-     * @param key node's key
-     * @param degree node's degree
-     * @param marked node's marked fam 
+     * Helps if we need to create a node with all values
+     * @param parent FibonacciNode's parent
+     * @param child FibonacciNode's child
+     * @param left FibonacciNode to FibonacciNode's left
+     * @param right FibonacciNode to FibonacciNode's right
+     * @param key FibonacciNode's key
+     * @param degree FibonacciNode's degree
+     * @param marked FibonacciNode's mark
+     * 
      */
-    public Node(Node parent, Node child, Node left, Node right,
+    public FibonacciNode(FibonacciNode parent, FibonacciNode child, FibonacciNode left, FibonacciNode right,
         int key, int degree, boolean marked) {
         this.parent = parent;
         this.child = child;
@@ -69,13 +74,4 @@ public class Node {
     public int getKey() {
         return this.key;
     }
-
-    /**
-     * Accessor method for value.
-     * ?? THIS IS NOT A FIELD HERE ??
-     * @return value not sure???
-     */
-    /*public int getValue() {
-        return this.value;
-    }*/
 }
