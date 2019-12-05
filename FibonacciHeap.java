@@ -1,6 +1,4 @@
 import java.util.*;
-//import java.lang.Math;
-
 /**
  * Fibonacci Heap class.
  * @author Alisha Sprinkle (primarily)

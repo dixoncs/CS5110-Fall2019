@@ -1,13 +1,26 @@
+/**
+ * SprinkleHollowHeapClass
+ * Follows the implementation on page 15-17 in the paper
+ * @author Alisha Sprinkle 
+ */
 public class SprinkleHollowHeap
 {
     private SprinkleHollowNode minH;
 
+     /**
+     * Constructor.
+     * Sets the min to null and the initial count to 0
+     */    
     public SprinkleHollowHeap()
     {
         minH = null;
-        nodeCount = 0;
     }
-
+    
+    /** 
+     * @param e The node to create
+     * @param k the key to set it to
+     * @return SprinkleHollowNode
+     */    
     public SprinkleHollowNode makeNode(SprinkleHollowNode e, int k)
     {
         SprinkleHollowNode u = new SprinkleHollowNode();
@@ -18,8 +31,15 @@ public class SprinkleHollowHeap
         return u;
     }
 
+    
+    /** 
+     * @param v the first node to link
+     * @param w the second node to link
+     * @return SprinkleHollowNode
+     */
     public SprinkleHollowNode link(SprinkleHollowNode v, SprinkleHollowNode w)
     {
+        //we want the child to be the larger of the two nodes linking
         if(v.key >= w.key)
         {
             addChild(v,w);
@@ -32,12 +52,22 @@ public class SprinkleHollowHeap
         }
     }
 
+    
+    /** 
+     * @param v the node to make the child
+     * @param w the node to make the parent
+     */
     public void addChild(SprinkleHollowNode v, SprinkleHollowNode w)
     {
         v.next = w.child;
         w.child = v;
     }
 
+    
+    /** 
+     * @param g merges two nodes/heaps together
+     * @return SprinkleHollowNode
+     */
     public SprinkleHollowNode meld(SprinkleHollowNode g)
     {
         if(g == null)
@@ -51,6 +81,10 @@ public class SprinkleHollowHeap
         return link(g, minH);
     }
 
+    
+    /** 
+     * @return SprinkleHollowNode the min node 
+     */
     public SprinkleHollowNode findMin()
     {
         if(minH == null)
@@ -63,11 +97,23 @@ public class SprinkleHollowHeap
         }
     }
 
+    
+    /** 
+     * @param e the node to insert
+     * @param k the key of the new node to insert
+     * @return SprinkleHollowNode
+     */
     public SprinkleHollowNode insert(SprinkleHollowNode e, int k)
     {
         return meld(makeNode(e, k));
     }
 
+    
+    /** 
+     * @param e the node we want to decrease the key of
+     * @param k the key we want to decrease to
+     * @return SprinkleHollowNode
+     */
     public SprinkleHollowNode decreaseKey(SprinkleHollowNode e, int k)
     {
         SprinkleHollowNode u = e.node;
@@ -87,6 +133,12 @@ public class SprinkleHollowHeap
         return link(v,minH);
     }
 
+    
+    /** 
+     * Deletes a node from the heap
+     * @param e the node we want to delete
+     * @return SprinkleHollowNode
+     */
     public SprinkleHollowNode delete(SprinkleHollowNode e)
     {
         e.node.item = null;
@@ -134,15 +186,25 @@ public class SprinkleHollowHeap
         }
     }
 
+    
+    /** 
+     * Destroys the node by setting everything to null.
+     * @param u the node to be set to null
+     */
     public void destroy(SprinkleHollowNode u)
     {
+        u.node = null;
         u.child = null;
         u.extraParent = null;
         u.item = null;
-        u.key = -1; // destroy key is 1
+        u.key = -1; // destroy key is -1
         u.rank = -1;
     }
 
+    
+    /** 
+     * @param u
+     */
     public void doRankedLinks(SprinkleHollowNode u)
     {
 
