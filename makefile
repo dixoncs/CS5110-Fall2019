@@ -19,7 +19,7 @@ compile: HeapDriver.java HeapDriverTest.java $(JUNIT5_JAR)
 	javac Node.java
 	javac HollowNode.java
 	javac FibonacciHeap.java
-#	javac HollowHeap.java
+	javac HollowHeap.java
 	javac HeapDriver.java
 	@javac -cp .:$(JUNIT5_JAR) HeapDriverTest.java
 
@@ -28,10 +28,6 @@ test: $(JUNIT5_JAR)
 
 check: 
 	@java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) *.java
-#	FibonacciHeap.java style.xml
-#	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) FibonacciHeap.java
-#	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) HollowHeap.java
-#	java $(CKSTYLE_COMMAND) -c $(CKSTYLE_XML) HeapDriver.java
 
 clean:
 	@rm -f *.class
