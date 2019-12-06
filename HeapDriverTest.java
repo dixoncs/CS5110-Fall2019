@@ -13,26 +13,78 @@ import java.io.PrintStream;
 */
 public class HeapDriverTest {
     /**
-    * Tests that HeapDriver, FibonacciHeap, and HollowHeap classes exist.
-    */
+     * Tests that the HeapDriver class exists.
+     */
     @Test
-    public void testClassesExists() {
+    public void testHeapDriverExists() {
         Class d;
-        Class f;
-        Class h;
         try {
             d = Class.forName("HeapDriver");
-            f = Class.forName("FibonacciHeap");
-            //h = Class.forName("HollowHeap");
         } 
         catch (Exception e) {
-            fail("Did you name the classes correctly? " + e);
+            fail("Did you name the class correctly? " + e);
         }
     }
 
     /**
-    * Tests FibonacciHeap constructor.
-    */
+     * Tests that the FibonacciHeap class exists.
+     */
+    @Test
+    public void testFibonacciExists() {
+        Class f;
+        try {
+            f = Class.forName("FibonacciHeap");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+   
+    /**
+     * Tests that the HollowHeap class exists.
+     */
+    @Test
+    public void testHollowHeapExists() {
+        Class h;
+        try {
+            h = Class.forName("HollowHeap");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+
+    /**
+     * Tests that the Node class exists.
+     */
+    @Test
+    public void testNodeExists() {
+        Class n;
+        try {
+            n = Class.forName("Node");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+
+    /**
+     * Tests that the HollowNode class exists.
+     */
+    @Test
+    public void testHollowNodeExists() {
+        Class hn;
+        try {
+            hn = Class.forName("HollowNode");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+    
+    /**
+     * Tests FibonacciHeap constructor.
+     */
     @Test
     public void testFibonacciHeapConstructor() {
         try {
@@ -44,9 +96,9 @@ public class HeapDriverTest {
     }
 
     /**
-    * Tests HollowHeap constructor.
-    */
-    /*@Test
+     * Tests HollowHeap constructor.
+     */
+    @Test
     public void testHollowHeapConstructor() {
         try {
             HollowHeap hHeap = new HollowHeap();
@@ -54,7 +106,7 @@ public class HeapDriverTest {
         catch (Exception ex) {
             fail("Constructor did not work. " + ex);
         }
-    }*/
+    }
 
 
 
