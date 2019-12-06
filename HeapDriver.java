@@ -2,7 +2,7 @@
 
 /**
  * Heap driver class.
- * @author Courtney Dixon and Aisha Sprinkle
+ * @author Courtney Dixon
  * @version 11/9/2019
  */
 public class HeapDriver {

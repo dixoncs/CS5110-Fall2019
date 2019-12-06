@@ -1,3 +1,5 @@
+#author Courtney Dixon
+
 JUNIT5_JAR = junit-platform-console-standalone-1.2.0.jar
 JUNIT5_RUNNER = org.junit.platform.console.ConsoleLauncher
 CKSTYLE_XML = style.xml

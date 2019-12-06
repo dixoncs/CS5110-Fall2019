@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * Fibonacci Heap class.
- * @author Courtney Dixon and Alisha Sprinkle
+ * @author Alisha Sprinkle
  * @version 11/9/2019
  */
 public class FibonacciHeap {

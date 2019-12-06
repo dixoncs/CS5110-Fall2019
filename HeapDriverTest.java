@@ -8,7 +8,7 @@ import java.io.PrintStream;
 
 /**
 * HeapDriverTest.
-* @author Courtney Dixon and Alisha Sprinkle
+* @author Courtney Dixon
 * @version 11/9/2019
 */
 public class HeapDriverTest {

@@ -6,7 +6,7 @@ import java.util.*;
  * This is our attempt to implement the TWO-PARENT HOLLOW HEAP data
  * structure introduced by Hansen, Kaplan, Tarjan, and Zwick.
  * 
- * @author Courtney Dixon and Alisha Sprinkle
+ * @author Courtney Dixon
  * @version 11/9/2019
  */
 public class HollowHeap {
