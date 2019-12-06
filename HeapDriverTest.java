@@ -7,29 +7,25 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 /**
-* HeapDriverTest.java
+* HeapDriverTest.
 * @author Courtney Dixon and Alisha Sprinkle
 * @version 11/9/2019
 */
-public class HeapDriverTest 
-{
+public class HeapDriverTest {
     /**
     * Tests that HeapDriver, FibonacciHeap, and HollowHeap classes exist.
     */
     @Test
-    public void testClassesExists()
-    {
+    public void testClassesExists() {
         Class d;
         Class f;
         Class h;
-        try
-        {
+        try {
             d = Class.forName("HeapDriver");
             f = Class.forName("FibonacciHeap");
-            h = Class.forName("HollowHeap");
+            //h = Class.forName("HollowHeap");
         } 
-        catch (Exception e)
-        {
+        catch (Exception e) {
             fail("Did you name the classes correctly? " + e);
         }
     }
@@ -38,14 +34,11 @@ public class HeapDriverTest
     * Tests FibonacciHeap constructor.
     */
     @Test
-    public void testFibonacciHeapConstructor()
-    {
-        try
-        {
+    public void testFibonacciHeapConstructor() {
+        try {
             FibonacciHeap fHeap = new FibonacciHeap();
         } 
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             fail("Constructor did not work. " + ex);
         }
     }
@@ -53,18 +46,18 @@ public class HeapDriverTest
     /**
     * Tests HollowHeap constructor.
     */
-    @Test
-    public void testHollowHeapConstructor()
-    {
-        try
-        {
+    /*@Test
+    public void testHollowHeapConstructor() {
+        try {
             HollowHeap hHeap = new HollowHeap();
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             fail("Constructor did not work. " + ex);
         }
-    }
+    }*/
+
+
+
 
     /**
     * Tests a method that builds something.

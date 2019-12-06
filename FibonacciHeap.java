@@ -1,28 +1,30 @@
-
 import java.util.*;
-import java.lang.Math;
+//import java.lang.Math;
+
 /**
  * Fibonacci Heap class.
  * @author Courtney Dixon and Alisha Sprinkle
  * @version 11/9/2019
  */
-public class FibonacciHeap
-{
+public class FibonacciHeap {
+    
     private Node minNode;
     private int nodeCount;
     /**
      * Constructor.
      */
-    public FibonacciHeap()
-    {
+    public FibonacciHeap() {
         minNode = null;
         nodeCount = 0;
-
     }
 
-    public void insert( Node newNode) {
-        if (minNode != null) // heap is not empty
-        {
+    /**
+     * Insert.
+     * @param newNode a thing
+     */
+    public void insert(Node newNode) {
+        // heap is not empty
+        if (minNode != null) {
             // Add in the new Node to the right of our min
             newNode.left = minNode;
             newNode.right = minNode.right;
@@ -43,13 +45,19 @@ public class FibonacciHeap
             if (newNode.key < minNode.key) {
                 minNode = newNode;
             }
-        } else {
+        } 
+        else {
             minNode = newNode;
         }
         nodeCount++;
     }
 
-    public void cut( Node cutNode,  Node fromNode) {
+    /**
+     * Cut.
+     * @param cutNode a thing
+     * @param fromNode a thing
+     */
+    public void cut(Node cutNode, Node fromNode) {
         // Old technique did not work
         // I forgot to include a marked flag
         // and I was getting confused about who I was cutting
@@ -89,6 +97,10 @@ public class FibonacciHeap
 
     }
 
+    /**
+     * Cascade Cut.
+     * @param cutNode a thing
+     */
     public void cascadeCut(Node cutNode) {
         // In my implementation of decreaseKey I was only cutting
         // Cascade cut is used to help keep thet time complexity small
@@ -111,7 +123,12 @@ public class FibonacciHeap
         }
     }
 
-    public void makeChild( Node child,  Node parent) {
+    /**
+     * Make Child.
+     * @param child a thing
+     * @param parent a thing
+     */
+    public void makeChild(Node child, Node parent) {
         // take child out of the root list
         child.left.right = child.right;
         child.right.left = child.left;
@@ -122,7 +139,8 @@ public class FibonacciHeap
             child.right = child;
             child.left = child;
             parent.child = child;
-        } else {
+        } 
+        else {
             child.left = parent.child;
             child.right = parent.child.right;
             parent.child.right = child;
@@ -133,6 +151,11 @@ public class FibonacciHeap
         parent.degree++;
     }
 
+    /**
+     * Decrease Key.
+     * @param decNode a thing
+     * @param key a thing
+     */
     public void decreaseKey(Node decNode,  int key) {
         // set the key
         decNode.key = key;
@@ -150,10 +173,17 @@ public class FibonacciHeap
         }
     }
 
+    /**
+     * Find Minimum.
+     * @return minNode a thing
+     */
     public Node findMin() {
         return minNode;
     }
 
+    /**
+     * Delete Minimum.
+     */
     public void deleteMin() {
         Node tempMin = minNode;
         Node tempMinPtr = tempMin;
@@ -167,49 +197,51 @@ public class FibonacciHeap
                     tempMinChild.right = minNode;
                     tempMinChild.left = minNode.left;
                     minNode.left = tempMinChild;
-                    if(tempMinChild.key < minNode.key)
-                    {
+                    if (tempMinChild.key < minNode.key) {
                         minNode = tempMinChild;
                     }
                     tempMinChild.parent = null;
                     tempMinChild = tempMinPtr;
-                } while (tempMinPtr != tempMin.child);
+                } 
+                while (tempMinPtr != tempMin.child);
             }
             tempMin.left.right = tempMin.right;
             tempMin.right.left = tempMin.left;
             minNode = tempMin.left;
             if (tempMin == tempMin.right && tempMin.child == null) {
                 minNode = null;
-            } else {
-
+            } 
+            else {
                 minNode = tempMin.left;
                 consolidate();
             }
             nodeCount--;
         }   
-        if(nodeCount == 0)
-        {
+        if (nodeCount == 0) {
             minNode = null;
         }
     }
 
-    public void delete(Node dNode)
-    {
-        if(dNode == null)
-        {
+    /**
+     * Delete.
+     * @param dNode a thing
+     */
+    public void delete(Node dNode) {
+        if (dNode == null) {
             System.out.println("Can't delete a null node!");
         }
-        if(dNode == minNode)
-        {
+        if (dNode == minNode) {
             deleteMin();
         }
-        else
-        {
+        else {
             decreaseKey(dNode, -1);
             deleteMin();
         }
     }
 
+    /**
+     * Consolidate.
+     */
     public void consolidate() {
         int sizeInt = nodeCount + 50;
         List<Node> degreeTable = new ArrayList<Node>(sizeInt);
@@ -233,12 +265,10 @@ public class FibonacciHeap
             Node tempMinRight = tempMin.right;
             while (true) {
                 Node compNode = degreeTable.get(tempMinDegree);
-                if(compNode == null)
-                {
+                if (compNode == null) {
                     break;
                 }
-                if(tempMin.key > compNode.key)
-                {
+                if (tempMin.key > compNode.key) {
                     Node temp = compNode;
                     compNode = tempMin;
                     tempMin = temp;
@@ -257,46 +287,51 @@ public class FibonacciHeap
             if (cNode == null) {
                 continue;
             }
-            if(minNode != null)
-            {
+            if (minNode != null) {
                 cNode.left.right = cNode.right;
                 cNode.right.left = cNode.left;
                 cNode.left = minNode;
                 cNode.right = minNode.right;
                 minNode.right = cNode;
                 cNode.right.left = cNode;
-                if(cNode.key < minNode.key)
-                {
+                if (cNode.key < minNode.key) {
                     minNode = cNode;
                 }
             }
-            else
-            {
+            else {
                 minNode = cNode;
             }
         }
     }
 
+    /**
+     * DisplayHeap.
+     */
     public void displayHeap() {
         Node pointer = minNode;
         String tree = "";
         if (pointer == null) {
             tree += "Heap is Empty";
-        } else {
+        } 
+        else {
             do {
                 tree += pointer.key;
                 pointer = pointer.right;
                 if (pointer != minNode) {
                     tree += "->";
                 }
-            } while (pointer != minNode && pointer.right != null);
+            } 
+            while (pointer != minNode && pointer.right != null);
             tree += "\n" + "The heap has " + nodeCount + " nodes.";
         }
         System.out.println(tree);
     }
 
-    public void test1(FibonacciHeap fh)
-    {
+    /**
+     * Test1.
+     * @param fh a thing
+     */
+    public void test1(FibonacciHeap fh) {
         System.out.println("Running test 1");
         Node n1 = new Node(6);
         Node n2 = new Node(4);
@@ -343,8 +378,11 @@ public class FibonacciHeap
         System.out.println("-----------------------------------------------------\n");
     }
 
-    public void test2(FibonacciHeap fh)
-    {
+    /**
+     * Test2.
+     * @param fh a thing
+     */
+    public void test2(FibonacciHeap fh) {
         System.out.println("Running test 2");
         Node n1 = new Node(6);
         Node n2 = new Node(4);
@@ -390,14 +428,17 @@ public class FibonacciHeap
         fh.displayHeap();
         System.out.println("-----------------------------------------------------\n");
     }
-    public static void main( String[] args) {
+    
+    /**
+     * Main method.
+     * @param args commandline arguments (not used)
+     */
+    public static void main(String[] args) {
         System.out.println("Creating Fibonacci Heap");
         FibonacciHeap fh = new FibonacciHeap();
      
         fh.test1(fh);
         fh.test2(fh);
-
     }
-
 }
 
