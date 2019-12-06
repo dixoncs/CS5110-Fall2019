@@ -1,7 +1,7 @@
 JUNIT5_JAR = junit-platform-console-standalone-1.2.0.jar
 JUNIT5_RUNNER = org.junit.platform.console.ConsoleLauncher
 CKSTYLE_XML = cs_appstate_checks.xml
-CKSTYLE_COMMAND =  -jar /usr/local/checkstyle-5.5/checkstyle-5.5-all.jar
+CKSTYLE_COMMAND =  -jar checkstyle-5.5-all.jar
 PROG_RUNNER = java HeapDriver
 
 # makefile syntax
