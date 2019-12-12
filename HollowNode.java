@@ -6,21 +6,23 @@ import java.util.*;
  * @author Courtney Dixon
  * @version 11/9/2019
  */
-public class  HollowNode {
-    
+public class  HollowNode {    
     int key;
     int rank;
     Node item;
-    HollowNode ep;
     HollowNode child;
     HollowNode next;
-    HollowNode node;    
+    HollowNode extraParent;
     
     /**
      * No-arg Constructor.
      */
     public HollowNode() {
-        HollowNode hugh = new HollowNode();
+        key = 0;
+        rank = 0;
+        item = new Node();
+        child = null;
+        next = null;
+        extraParent = null;
     } 
-
 }
