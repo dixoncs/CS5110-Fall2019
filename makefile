@@ -4,24 +4,37 @@ JUNIT5_JAR = junit-platform-console-standalone-1.2.0.jar
 JUNIT5_RUNNER = org.junit.platform.console.ConsoleLauncher
 CKSTYLE_XML = style.xml
 CKSTYLE_COMMAND = -jar checkstyle-5.5-all.jar
+FIB_RUNNER = @java FibonacciHeapDriver
+HOLLOW_RUNNER = @java HollowHeapDriver
 PROG_RUNNER = @java HeapDriver
 
 default:
-	@echo "5 available targets:"	
+	@echo "7 available targets:"	
 	@echo "____________________ check - runs checkstyle"
 	@echo "____________________ compile - compiles all .java files"
 	@echo "____________________ test - builds JUnit5 tests"
-	@echo "____________________ run - executes the driver program"
+	@echo "____________________ fib - runs the Fibonacci Heap driver program"
+	@echo "____________________ hollow - runs the Hollow Heap driver program"
+	@echo "____________________ run - executes the combined driver program"
 	@echo "____________________ clean - removes editor tmpfiles and .class files"
 
+fib:
+	$(FIB_RUNNER)
+	
+hollow:
+	$(HOLLOW_RUNNER)
+	
 run:
 	$(PROG_RUNNER)
 
 compile: HeapDriver.java HeapDriverTest.java $(JUNIT5_JAR)
 	javac Node.java
+	javac FibonacciNode.java
 	javac HollowNode.java
 	javac FibonacciHeap.java
 	javac HollowHeap.java
+	javac FibonacciHeapDriver.java
+	javac HollowHeapDriver.java
 	javac HeapDriver.java
 	@javac -cp .:$(JUNIT5_JAR) HeapDriverTest.java
 
