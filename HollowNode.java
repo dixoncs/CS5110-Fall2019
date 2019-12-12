@@ -10,7 +10,7 @@ public class  HollowNode {
     
     int key;
     int rank;
-    //private <DATA TYPE> item;     ??? not sure about this one yet maybe a HollowNode as well
+    Node item;
     HollowNode ep;
     HollowNode child;
     HollowNode next;
