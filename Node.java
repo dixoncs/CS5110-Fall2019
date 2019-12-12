@@ -1,19 +1,20 @@
 /**
- * Node class.
- *
+ * Node class for the items that are held 
+ * by HollowNodes. Called "e" in the paper.
+ * 
  * @author Courtney Dixon
  * @version 11/9/2019
  */
 public class Node {
     int key;
-    Node n;
+    HollowNode node;    //this is the HollowNode that this node belongs to
 
     /**
      * No-arg Constructor.
      */
     public Node() {
         key = -1;
-        
+        node = null;
     }
 
     /**
@@ -22,7 +23,7 @@ public class Node {
      */
     public Node(int key) {
         this.key = key;
-        n = null;
+        node = null;
     }
 
     /**
@@ -33,25 +34,7 @@ public class Node {
      */
     public Node(int key, Node node) {
         this.key = key;
-        this.n = node;
-    }
-
-    /**
-     * Accessor method for key field.
-     *
-     * @return key key field
-     */
-    public int getKey() {
-        return this.key;
-    }
-
-    /**
-     * Accessor method for n field.
-     * 
-     * @return n node's owner
-     */
-    public Node getNode() {
-        return this.n;
+        this.node = node;
     }
 }
 
