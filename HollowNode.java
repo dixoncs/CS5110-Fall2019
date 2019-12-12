@@ -20,7 +20,7 @@ public class  HollowNode {
     public HollowNode() {
         key = 0;
         rank = 0;
-        item = new Node();
+        item = null;
         child = null;
         next = null;
         extraParent = null;
