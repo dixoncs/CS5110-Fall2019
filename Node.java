@@ -20,7 +20,7 @@ public class Node {
      * One-arg Constructor.
      * @param key nodes key
      */
-    public Node(int key)
+    public Node(int key) {
         this.key = key;
         n = null;
     }
@@ -50,7 +50,8 @@ public class Node {
      * 
      * @return n node's owner
      */
-    public int getNode() {
+    public Node getNode() {
         return this.n;
     }
 }
+

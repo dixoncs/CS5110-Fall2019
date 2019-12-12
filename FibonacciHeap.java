@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class FibonacciHeap {
     
-    private Node minNode;
+    private FibonacciNode minNode;
     private int nodeCount;
     /**
      * Constructor.
@@ -22,7 +22,7 @@ public class FibonacciHeap {
      * Insert.
      * @param newNode a thing
      */
-    public void insert(Node newNode) {
+    public void insert(FibonacciNode newNode) {
         // heap is not empty
         if (minNode != null) {
             // Add in the new Node to the right of our min
@@ -57,7 +57,7 @@ public class FibonacciHeap {
      * @param cutNode a thing
      * @param fromNode a thing
      */
-    public void cut(Node cutNode, Node fromNode) {
+    public void cut(FibonacciNode cutNode, FibonacciNode fromNode) {
         // Old technique did not work
         // I forgot to include a marked flag
         // and I was getting confused about who I was cutting
@@ -101,12 +101,12 @@ public class FibonacciHeap {
      * Cascade Cut.
      * @param cutNode a thing
      */
-    public void cascadeCut(Node cutNode) {
+    public void cascadeCut(FibonacciNode cutNode) {
         // In my implementation of decreaseKey I was only cutting
         // Cascade cut is used to help keep thet time complexity small
         // Allows you to cut the edge joining a node to a parent
         // the you make the new node a root.
-        Node cutNodeParent = cutNode.parent;
+        FibonacciNode cutNodeParent = cutNode.parent;
 
         if (cutNodeParent != null) {
             // if the parent is not marked we will mark it
@@ -128,7 +128,7 @@ public class FibonacciHeap {
      * @param child a thing
      * @param parent a thing
      */
-    public void makeChild(Node child, Node parent) {
+    public void makeChild(FibonacciNode child, FibonacciNode parent) {
         // take child out of the root list
         child.left.right = child.right;
         child.right.left = child.left;
@@ -156,11 +156,11 @@ public class FibonacciHeap {
      * @param decNode a thing
      * @param key a thing
      */
-    public void decreaseKey(Node decNode,  int key) {
+    public void decreaseKey(FibonacciNode decNode,  int key) {
         // set the key
         decNode.key = key;
 
-        Node decNodeParent = decNode.parent;
+        FibonacciNode decNodeParent = decNode.parent;
 
         if ((decNodeParent != null) && (decNode.key < decNodeParent.key)) {
             cut(decNode, decNodeParent);
@@ -177,7 +177,7 @@ public class FibonacciHeap {
      * Find Minimum.
      * @return minNode a thing
      */
-    public Node findMin() {
+    public FibonacciNode findMin() {
         return minNode;
     }
 
@@ -185,9 +185,9 @@ public class FibonacciHeap {
      * Delete Minimum.
      */
     public void deleteMin() {
-        Node tempMin = minNode;
-        Node tempMinPtr = tempMin;
-        Node tempMinChild = null;
+        FibonacciNode tempMin = minNode;
+        FibonacciNode tempMinPtr = tempMin;
+        FibonacciNode tempMinChild = null;
         if (tempMin != null) {
             if (tempMin.child != null) {
                 tempMinChild = tempMin.child;
@@ -226,7 +226,7 @@ public class FibonacciHeap {
      * Delete.
      * @param dNode a thing
      */
-    public void delete(Node dNode) {
+    public void delete(FibonacciNode dNode) {
         if (dNode == null) {
             System.out.println("Can't delete a null node!");
         }
@@ -244,13 +244,13 @@ public class FibonacciHeap {
      */
     public void consolidate() {
         int sizeInt = nodeCount + 50;
-        List<Node> degreeTable = new ArrayList<Node>(sizeInt);
+        List<FibonacciNode> degreeTable = new ArrayList<FibonacciNode>(sizeInt);
         for (int i = 0; i < sizeInt; i++) {
             degreeTable.add(null);
         }
         // need the number of roots
         int rootCount = 0;
-        Node tempMin = minNode;
+        FibonacciNode tempMin = minNode;
 
         if (tempMin != null) {
             rootCount++;
@@ -262,14 +262,14 @@ public class FibonacciHeap {
         }
         while (rootCount > 0) {
             int tempMinDegree = tempMin.degree;
-            Node tempMinRight = tempMin.right;
+            FibonacciNode tempMinRight = tempMin.right;
             while (true) {
-                Node compNode = degreeTable.get(tempMinDegree);
+                FibonacciNode compNode = degreeTable.get(tempMinDegree);
                 if (compNode == null) {
                     break;
                 }
                 if (tempMin.key > compNode.key) {
-                    Node temp = compNode;
+                    FibonacciNode temp = compNode;
                     compNode = tempMin;
                     tempMin = temp;
                 }
@@ -283,7 +283,7 @@ public class FibonacciHeap {
         }
         minNode = null;
         for (int i = 0; i < sizeInt; i++) {
-            Node cNode = degreeTable.get(i);
+            FibonacciNode cNode = degreeTable.get(i);
             if (cNode == null) {
                 continue;
             }
@@ -308,7 +308,7 @@ public class FibonacciHeap {
      * DisplayHeap.
      */
     public void displayHeap() {
-        Node pointer = minNode;
+        FibonacciNode pointer = minNode;
         String tree = "";
         if (pointer == null) {
             tree += "Heap is Empty";
@@ -333,9 +333,9 @@ public class FibonacciHeap {
      */
     public void test1(FibonacciHeap fh) {
         System.out.println("Running test 1");
-        Node n1 = new Node(6);
-        Node n2 = new Node(4);
-        Node n3 = new Node(8);
+        FibonacciNode n1 = new FibonacciNode(6);
+        FibonacciNode n2 = new FibonacciNode(4);
+        FibonacciNode n3 = new FibonacciNode(8);
         fh.insert(n1);
         fh.insert(n2);
         fh.insert(n3);
@@ -384,9 +384,9 @@ public class FibonacciHeap {
      */
     public void test2(FibonacciHeap fh) {
         System.out.println("Running test 2");
-        Node n1 = new Node(6);
-        Node n2 = new Node(4);
-        Node n3 = new Node(8);
+        FibonacciNode n1 = new FibonacciNode(6);
+        FibonacciNode n2 = new FibonacciNode(4);
+        FibonacciNode n3 = new FibonacciNode(8);
         fh.insert(n1);
         fh.insert(n2);
         fh.insert(n3);

@@ -56,8 +56,9 @@ public class FibonacciNode {
      * @param marked FibonacciNode's mark
      * 
      */
-    public FibonacciNode(FibonacciNode parent, FibonacciNode child, FibonacciNode left, FibonacciNode right,
-        int key, int degree, boolean marked) {
+    public FibonacciNode(FibonacciNode parent, FibonacciNode child, 
+                         FibonacciNode left, FibonacciNode right,
+                         int key, int degree, boolean marked) {
         this.parent = parent;
         this.child = child;
         this.left = left;

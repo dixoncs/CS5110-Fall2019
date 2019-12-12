@@ -12,7 +12,7 @@ public class HollowHeapDriver {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-       HollowHeap testHollowHeap = new HollowHeap();
-       testHollowHeap.insert(new HollowNode());
+        HollowHeap testHollowHeap = new HollowHeap();
+        //testHollowHeap.insert(new HollowNode());
     }
 }
