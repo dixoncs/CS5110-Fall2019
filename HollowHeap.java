@@ -23,6 +23,7 @@ public class HollowHeap {
     private int maxRank;
     private HollowNode minH;
     private int numNodes;
+    private HollowNode arrayA[];   //full of roots indexed by rank (at most 1/rank)
 
     /**
      * Constructor - makeHeap().
@@ -195,7 +196,7 @@ public class HollowHeap {
      * @return h a thing
      */
     public HollowHeap delete(Node e, HollowHeap h) {
-    /*    e.node.item = null;
+        e.node.item = null;
         e.node = null;
         if (minH.item != null) {
             // Non-minimum deletion 
@@ -203,28 +204,35 @@ public class HollowHeap {
         }
         maxRank = 0;
 
+        HollowNode w = new HollowNode();
+        HollowNode v = new HollowNode();
+        HollowNode u = new HollowNode();
+        
         // While L not empty 
         while (h != null) {
-            w = h.child;
-           v = h;
-            h = h.next;
+            /*w = h.child;    //w = h.minH.child??
+            v = h;          //v = h.minH??
+            h = h.next;     //h.minH = h.minH.child.next??*/
+            w = h.minH.child;
+            v = h.minH;
+            h.minH = h.minH.child.next;
             while (w != null) {
                 u = w;
                 w = w.next;
 
                 // u is hollow 
-                if (u.item = null) {
+                if (u.item == null) {
 
                     // v is the only parent 
-                    if (u.ep = null) {
+                    if (u.extraParent == null) {
 
                         // add u to L 
-                        u.next = h;       
-                        h = u;
+                        u.next = h.minH.child;       
+                        h.minH = u;
                     }
                     else {
                         // u has two parents 
-                        if (u.ep = v) {
+                        if (u.extraParent == v) {
                             // v is the second parent 
                             w = null;       
                         }
@@ -232,52 +240,52 @@ public class HollowHeap {
                             // v is the first parent 
                             u.next = null;      
                         }
-                        u.ep = null;
+                        u.extraParent = null;
                     }
                 }
                 else {
                     // u is full 
-                    doRankedLinks();
+                    doRankedLinks(u);
                 }
-                destroy v;
+                //destroy v;
             }
         }
-        doUnrankedLinks();*/
+        doUnrankedLinks();
         return h;
     }
 
     /**
      * Does ranked links.
      * @param u a hollow node maybe?
-     *
+     */
     public void doRankedLinks(HollowNode u) {
-        while (A[u.rank] != null) {
-            u = link(u, A[u.rank]);
-            A[u.rank] = null;
+        while (arrayA[u.rank] != null) {
+            u = link(u, arrayA[u.rank]);
+           arrayA[u.rank] = null;
             u.rank = u.rank + 1;
         }
-        A[u.rank] = u;
+        arrayA[u.rank] = u;
         if (u.rank > maxRank) {
             maxRank = u.rank;
         }
     }
 
-    **
+   /**
      * Does unranked links.
-     *
+     */
     public void doUnrankedLinks() {
         for (int i = 0; i < maxRank; i++) {
-            if (A[i] != null) {
-                if (h = null) {
-                    h = A[i];
+            if (arrayA[i] != null) {
+                if (minH == null) {
+                    minH = arrayA[i];
                 }
                 else {
-                    h = link(h, A[i]);
+                    minH = link(minH, arrayA[i]);
                 }
-                A[i] = null;
+                arrayA[i] = null;
             }
         }
-    }*/
+    }
 
     /**
      * Accessor method for the numNodes field.
