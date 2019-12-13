@@ -12,6 +12,7 @@ import java.io.PrintStream;
 * @version 11/9/2019
 */
 public class HeapDriverTest {
+    
     /**
      * Tests that the HeapDriver class exists.
      */
@@ -27,10 +28,38 @@ public class HeapDriverTest {
     }
 
     /**
+     * Tests that the FibonacciHeapDriver class exists.
+     */
+    @Test
+    public void testFibonacciHeapDriverExists() {
+        Class d;
+        try {
+            d = Class.forName("FibonacciHeapDriver");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+
+    /**
+     * Tests that the HollowHeapDriver class exists.
+     */
+    @Test
+    public void testHollowHeapDriverExists() {
+        Class d;
+        try {
+            d = Class.forName("HollowHeapDriver");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+
+   /**
      * Tests that the FibonacciHeap class exists.
      */
     @Test
-    public void testFibonacciExists() {
+    public void testFibonacciHeapExists() {
         Class f;
         try {
             f = Class.forName("FibonacciHeap");
@@ -62,6 +91,20 @@ public class HeapDriverTest {
         Class n;
         try {
             n = Class.forName("Node");
+        } 
+        catch (Exception e) {
+            fail("Did you name the class correctly? " + e);
+        }
+    }
+
+    /**
+     * Tests that the FibonacciNode class exists.
+     */
+    @Test
+    public void testFibonacciNodeExists() {
+        Class n;
+        try {
+            n = Class.forName("FibonacciNode");
         } 
         catch (Exception e) {
             fail("Did you name the class correctly? " + e);

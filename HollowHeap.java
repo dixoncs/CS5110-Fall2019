@@ -40,9 +40,8 @@ public class HollowHeap {
     public HollowHeap(HollowNode hNode) {
         maxRank = 0;
         minH = hNode;
-                minH.item.node = hNode;
+        minH.item.node = hNode;
         numNodes += 1;
-
     }
 
     /**
@@ -300,15 +299,13 @@ public class HollowHeap {
     /**
      * Prints the whole HollowHeap.
      */
-    public void printHHeap()
-    {
+    public void printHHeap() {
         System.out.printf("The key of the root is %d\n", minH.key);
         HollowNode temp = minH.child;
         HollowNode temp2 = minH.child;
         System.out.printf("The first child of the root is %d\n", temp.key);
         System.out.print("The other children of the root are: ");
-        while(temp.next != null)
-        {
+        while (temp.next != null) {
             temp = temp.next;
             System.out.print(temp.key + " ");
         }
