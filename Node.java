@@ -32,7 +32,7 @@ public class Node {
      * @param key node's key
      * @param node node's owner
      */
-    public Node(int key, Node node) {
+    public Node(int key, HollowNode node) {
         this.key = key;
         this.node = node;
     }
