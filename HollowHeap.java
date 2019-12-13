@@ -46,6 +46,17 @@ public class HollowHeap {
     }
 
     /**
+     * One-arg Constructor.
+     * @param node HollowNode to make minH
+     */
+    public HollowHeap(Node node) {
+        maxRank = 0;
+        minH = makeNode(node, node.key);
+        minH.item.node = minH;
+        numNodes += 1;
+    }
+
+    /**
      * Makes a new node.
      *      an "auxiliary method" 
      * 
@@ -308,15 +319,29 @@ public class HollowHeap {
      * Prints the whole HollowHeap.
      */
     public void printHHeap() {
-        System.out.printf("The key of the root is %d\n", minH.key);
+        //System.out.printf("The key of the root is %d\n", minH.key);
         HollowNode temp = minH.child;
         HollowNode temp2 = minH.child;
-        System.out.printf("The first child of the root is %d\n", temp.key);
-        System.out.print("The other children of the root are: ");
+        //System.out.printf("The first child of the root is %d\n", temp.key);
+        //System.out.print("The other children of the root are: ");
+        System.out.println(minH.key);
         while (temp.next != null) {
-            temp = temp.next;
             System.out.print(temp.key + " ");
+            temp2 = temp;
+            //temp = temp.next;
+            while (temp2.child != null) {
+                System.out.print(temp2.key + " ");
+                temp2 = temp2.child;
+            }
+            temp = temp.next;
+            System.out.println();
         }
+        while (temp.child != null)
+        {
+            System.out.print(temp.key + " ");
+            temp = temp.child;
+        }
+        System.out.print(temp.key);
         System.out.println();
     }
     
