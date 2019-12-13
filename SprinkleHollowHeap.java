@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+
+import javax.lang.model.util.ElementScanner6;
+
 /**
  * SprinkleHollowHeapClass
  * Follows the implementation on page 15-17 in the paper
@@ -6,6 +10,9 @@
 public class SprinkleHollowHeap
 {
     private SprinkleHollowNode minH;
+    ArrayList<SprinkleHollowNode> A = new ArrayList<SprinkleHollowNode>();
+    int maxRank = 0;
+    int nodeCount;
 
      /**
      * Constructor.
@@ -14,6 +21,7 @@ public class SprinkleHollowHeap
     public SprinkleHollowHeap()
     {
         minH = null;
+        nodeCount = 0;
     }
     
     /** 
@@ -68,17 +76,20 @@ public class SprinkleHollowHeap
      * @param g merges two nodes/heaps together
      * @return SprinkleHollowNode
      */
-    public SprinkleHollowNode meld(SprinkleHollowNode g)
+    public void meld(SprinkleHollowNode g, SprinkleHollowNode h)
     {
         if(g == null)
         {
-            return minH;
+           minH = h;
         }
-        if(minH == null)
+        else if(h == null)
         {
-            return g;
+            minh = g;
         }
-        return link(g, minH);
+        else
+        {
+            minH = link(g, h);
+        }
     }
 
     
@@ -103,9 +114,10 @@ public class SprinkleHollowHeap
      * @param k the key of the new node to insert
      * @return SprinkleHollowNode
      */
-    public SprinkleHollowNode insert(SprinkleHollowNode e, int k)
+    public void insert(SprinkleHollowNode e, int k)
     {
-        return meld(makeNode(e, k));
+        nodeCount++;
+        meld(makeNode(e, k), minH);
     }
 
     
@@ -114,25 +126,31 @@ public class SprinkleHollowHeap
      * @param k the key we want to decrease to
      * @return SprinkleHollowNode
      */
-    public SprinkleHollowNode decreaseKey(SprinkleHollowNode e, int k)
+    public void decreaseKey(SprinkleHollowNode e, int k)
     {
         SprinkleHollowNode u = e.node;
         if(u == minH)
         {
             u.key = k;
-            return minH;
         }
-        SprinkleHollowNode v = makeNode(e,k);
-        u.item = null;
-        if(u.rank > 2)
+        else
         {
-            v.rank = u.rank - 2;
+            SprinkleHollowNode v = makeNode(e,k);
+            u.item = null;
+            if(u.rank > 2)
+            {
+                v.rank = u.rank - 2;
+            }
+            u.child = u;
+            u.extraParent = v;
+            link(v,minH);
         }
-        u.child = u;
-        u.extraParent = v;
-        return link(v,minH);
     }
 
+    public SprinkleHollowNode deleteMin()
+    {
+        return delete(minH);
+    }
     
     /** 
      * Deletes a node from the heap
@@ -141,6 +159,7 @@ public class SprinkleHollowHeap
      */
     public SprinkleHollowNode delete(SprinkleHollowNode e)
     {
+        nodeCount--;
         e.node.item = null;
         e.node = null;
         if(minH.item != null)
@@ -148,6 +167,7 @@ public class SprinkleHollowHeap
             return minH;
         }
         maxRank = 0;
+        getFullRoots();
         while(h != null)
         {
             SprinkleHollowNode w = minH.child;
@@ -178,15 +198,14 @@ public class SprinkleHollowHeap
                     }
                 }
                 else{
-                    //do ranked stuff
+                    doRankedLinks(u);
                 }
                 destroy(u);
             }
-            //do unranked stuff
+            doUnrankedLinks();
         }
     }
 
-    
     /** 
      * Destroys the node by setting everything to null.
      * @param u the node to be set to null
@@ -201,18 +220,129 @@ public class SprinkleHollowHeap
         u.rank = -1;
     }
 
-    
+    public void getFullRoots()
+    {
+        SprinkleHollowNode temp = minH;
+        while(temp != null)
+        {
+            if(temp.item != null)
+            {
+                A.add(temp);
+            }
+            temp = temp.next;
+        }
+    }
+
     /** 
      * @param u
      */
     public void doRankedLinks(SprinkleHollowNode u)
     {
-
+        while(A.get(u.rank) != null)
+        { 
+            u = link(u, A.get(u.rank));
+            A.set(u.rank,null);
+            u.rank = u.rank + 1; 
+        }
+        A.set(u.rank,u);
+        if(u.rank > maxRank)
+        {
+            maxRank = u.rank;
+        }
     }
 
     public void doUnrankedLinks()
     {
-
+        for(int i = 0; i < maxRank; i++)
+        {
+            if(A.get(i) != null)
+            {
+                if(minH = null)
+                {
+                    minH = A.get(i);
+                }
+                else
+                {
+                    minH = link(minH, A.get(i));
+                }
+                A.set(i,null);
+            }
+        }
+    }
+      /**
+     * DisplayHeap prints out a string representation of the heap.
+     * Useful for checking tests.
+     */
+    public void displayHeap() {
+        SprinkleHollowNode pointer = minH;
+        String tree = "";
+        if (pointer == null) {
+            tree += "Heap is Empty";
+        } 
+        else {
+            do {
+                tree += pointer.key;
+                pointer = pointer.next;
+                if (pointer != minH) {
+                    tree += "->";
+                }
+            } 
+            while (pointer != minH && pointer.next != null);
+            tree += "\n" + "The heap has " + nodeCount + " nodes.";
+        }
+        System.out.println(tree);
     }
 
+    public void test2(SprinkleHollowHeap sh) {
+        System.out.println("Running test 2");
+        SprinkleHollowNode n1 = new SprinkleHollowNode();
+        SprinkleHollowNode n2 = new SprinkleHollowNode();
+        SprinkleHollowNode n3 = new SprinkleHollowNode();
+        sh.insert(n1, 6);
+        sh.insert(n2, 4);
+        sh.insert(n3, 8);
+          
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing insert. Heap should contain 4,6,8");
+        sh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Decreasing key of n2 (4) to 3");
+        sh.decreaseKey(n2, 3);
+        sh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println(("Testing find min. Should return 3"));
+        System.out.println(sh.findMin().key);
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing delete min. Heap should contain 6,8");
+        sh.deleteMin();
+        System.out.println("The new min should be 6. Min is: " + sh.findMin().key);
+        sh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing delete on 8. Heap should contain 6");
+        sh.delete(n3);
+        System.out.println("The new min should be 6. Min is: " + sh.findMin().key);
+        sh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Testing delete on 6. Heap should contain nothing.");
+        sh.delete(n2);
+        System.out.println("The new min should be null. Min is: " + sh.findMin());
+        sh.displayHeap();
+        System.out.println("-----------------------------------------------------\n");
+    }
+
+    public static void main(String[] args)
+    {
+        SprinkleHollowHeap sh = new SprinkleHollowHeap();
+        sh.test2(sh);
+    }
 }

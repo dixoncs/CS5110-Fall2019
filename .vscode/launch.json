@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SprinkleHollowHeap",
+            "request": "launch",
+            "mainClass": "SprinkleHollowHeap"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - FibonacciHeap",
             "request": "launch",
             "mainClass": "FibonacciHeap"
