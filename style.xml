@@ -110,7 +110,7 @@ Checkstyle configuration for CS department at Appalachian State University
             <property name="format" value="^[A-Z][A-Z0-9_]*$"/>
         </module>
         <module name="LocalVariableName"/>
-        <module name="MemberName"/>
+        <!-- <module name="MemberName"/> -->
         <module name="MethodName"/>
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>

@@ -65,15 +65,15 @@ public class HollowHeapDriver {
         System.out.println("----------------------------------------------");
         System.out.println("----------------------------------------------");
         System.out.printf("There should be %d HollowNode(s) in the heap"
-        + " and there is(are) %d\n", count, testHH.getNumNodes());
+            + " and there is(are) %d\n", count, testHH.getNumNodes());
         testHH = testHH.delete(delNode, testHH);
         count--;
         System.out.printf("There should be %d HollowNode(s) in the heap"
-        + " and there is(are) %d\n", count, testHH.getNumNodes());
+            + " and there is(are) %d\n", count, testHH.getNumNodes());
         testHH = testHH.deleteMin(testHH);
         count--;
         System.out.printf("There should be %d HollowNode(s) in the heap"
-        + " and there is(are) %d\n", count, testHH.getNumNodes());
+            + " and there is(are) %d\n", count, testHH.getNumNodes());
         System.out.println("----------------------------------------------");
         System.out.println(testHH.findMin(testHH));
         testHH.printHHeap();

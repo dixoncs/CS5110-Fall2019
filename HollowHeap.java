@@ -150,7 +150,7 @@ public class HollowHeap {
     public HollowHeap insert(Node e, int key, HollowHeap h) {
         HollowNode newNode = makeNode(e, key);
         HollowHeap single = new HollowHeap(newNode);
-        return meld(single,h);
+        return meld(single, h);
     }
 
     /**
@@ -258,25 +258,32 @@ public class HollowHeap {
         doUnrankedLinks();
         return h;
     }
-    public void destroy(HollowNode v)
-    {
+    
+    /**
+     * Destroys a HollowNode.
+     * @param v HollowNode to destroy
+     */
+    public void destroy(HollowNode v) {
         v.child = null;
         v.extraParent = null;
         v.item = null;
         v.next = null;
     }
-    public void getFullRoots(HollowHeap h)
-    {
+
+    /**
+     * Gets the list of full roots.
+     * @param h the HollowHeap to get the full roots of
+     */
+    public void getFullRoots(HollowHeap h) {
         HollowNode temp = h.minH;
-        while(temp != null)
-        {
-            if(temp.item != null)
-            {
+        while (temp != null) {
+            if (temp.item != null) {
                 A.add(temp);
             }
             temp = temp.next;
         }
     }
+
     /**
      * Does ranked links.
      * @param u a hollow node maybe?
@@ -285,12 +292,11 @@ public class HollowHeap {
         while (A.get(u.rank) != null) {
             u = link(u, A.get(u.rank));
             A.set(u.rank, null);
-            if(u.rank + 1 < A.size())
-            {
+            if (u.rank + 1 < A.size()) {
                 u.rank = u.rank + 1;
             }
         }
-            A.set(u.rank, u);
+        A.set(u.rank, u);
         if (u.rank > maxRank) {
             maxRank = u.rank;
         }
@@ -350,8 +356,7 @@ public class HollowHeap {
             temp = temp.next;
             System.out.println();
         }
-        while (temp.child != null)
-        {
+        while (temp.child != null) {
             System.out.print(temp.key + " ");
             temp = temp.child;
         }
