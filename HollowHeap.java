@@ -150,7 +150,7 @@ public class HollowHeap {
     public HollowHeap insert(Node e, int key, HollowHeap h) {
         HollowNode newNode = makeNode(e, key);
         HollowHeap single = new HollowHeap(newNode);
-         return meld(single,h);
+        return meld(single,h);
     }
 
     /**
@@ -282,16 +282,15 @@ public class HollowHeap {
      * @param u a hollow node maybe?
      */
     public void doRankedLinks(HollowNode u) {
-        while (u.rank != A.size() && A.get(u.rank) != null) {
+        while (A.get(u.rank) != null) {
             u = link(u, A.get(u.rank));
             A.set(u.rank, null);
-            u.rank = u.rank + 1;
+            if(u.rank + 1 < A.size())
+            {
+                u.rank = u.rank + 1;
+            }
         }
-        u.rank = u.rank - 1;
-        if(u.rank > -1)
-        {
             A.set(u.rank, u);
-        }
         if (u.rank > maxRank) {
             maxRank = u.rank;
         }
@@ -335,25 +334,15 @@ public class HollowHeap {
      * Prints the whole HollowHeap.
      */
     public void printHHeap() {
+        System.out.printf("The key of the root is %d\n", minH.key);
         HollowNode temp = minH.child;
         HollowNode temp2 = minH.child;
-        System.out.println(minH.key);
+        System.out.printf("The first child of the root is %d\n", temp.key);
+        System.out.print("The other children of the root are: ");
         while (temp.next != null) {
-            System.out.print(temp.key + " ");
-            temp2 = temp;
-            while (temp2.child != null) {
-                System.out.print(temp2.key + " ");
-                temp2 = temp2.child;
-            }
             temp = temp.next;
-            System.out.println();
-        }
-        while (temp.child != null)
-        {
             System.out.print(temp.key + " ");
-            temp = temp.child;
         }
-        System.out.print(temp.key);
         System.out.println();
     }
     
