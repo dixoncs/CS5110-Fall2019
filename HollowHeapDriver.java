@@ -75,6 +75,7 @@ public class HollowHeapDriver {
         System.out.printf("There should be %d HollowNode(s) in the heap"
         + " and there is(are) %d\n", count, testHH.getNumNodes());
         System.out.println("----------------------------------------------");
+        System.out.println(testHH.findMin(testHH));
         testHH = testHH.decreaseKey(e2, 1, testHH);
         System.out.println(e2.key);
     }

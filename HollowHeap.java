@@ -150,7 +150,7 @@ public class HollowHeap {
     public HollowHeap insert(Node e, int key, HollowHeap h) {
         HollowNode newNode = makeNode(e, key);
         HollowHeap single = new HollowHeap(newNode);
-         return meld(single,h);
+        return meld(single,h);
     }
 
     /**
@@ -282,16 +282,15 @@ public class HollowHeap {
      * @param u a hollow node maybe?
      */
     public void doRankedLinks(HollowNode u) {
-        while (u.rank != A.size() && A.get(u.rank) != null) {
+        while (A.get(u.rank) != null) {
             u = link(u, A.get(u.rank));
             A.set(u.rank, null);
-            u.rank = u.rank + 1;
+            if(u.rank + 1 < A.size())
+            {
+                u.rank = u.rank + 1;
+            }
         }
-        u.rank = u.rank - 1;
-        if(u.rank > -1)
-        {
             A.set(u.rank, u);
-        }
         if (u.rank > maxRank) {
             maxRank = u.rank;
         }
