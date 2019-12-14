@@ -49,12 +49,12 @@ public class HollowHeapDriver {
         System.out.println("----------------------------------------------");
         testHH.printHHeap();
         System.out.println("----------------------------------------------");
-        for (int i = 0; i < 20; i++) {
+        /*for (int i = 0; i < 20; i++) {
             nextOne = rando.nextInt(25);
             System.out.print(nextOne + " ");
             testHH = testHH.insert(new Node(), nextOne, testHH);
             count++;
-        }
+        }*/
         //testHH.printHHeap();
         System.out.println("\n----------------------------------------------");
         System.out.printf("There should be %d HollowNode(s) in the heap"
@@ -76,6 +76,7 @@ public class HollowHeapDriver {
         + " and there is(are) %d\n", count, testHH.getNumNodes());
         System.out.println("----------------------------------------------");
         System.out.println(testHH.findMin(testHH));
+        testHH.printHHeap();
         testHH = testHH.decreaseKey(e2, 1, testHH);
         System.out.println(e2.key);
     }
