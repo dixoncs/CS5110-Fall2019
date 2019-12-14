@@ -19,27 +19,31 @@ public class HollowHeapDriver {
         rando = new Random();
         System.out.println("----------------------------------------------");
         //System.out.println("");
+        Node e2 = new Node(2);
         HollowHeap testHH = new HollowHeap(new HollowNode(3));
         count++;
         testHH.displayMin();
         System.out.println("----------------------------------------------");
         //System.out.println("");
-        testHH = testHH.insert(new Node(), 2, testHH);
+        testHH = testHH.insert(e2, e2.key, testHH);
         count++;
         testHH.displayMin();
         System.out.println("----------------------------------------------");
         //System.out.println("");
-        testHH = testHH.insert(new Node(), 1, testHH);
+        Node e3 = new Node(1);
+        testHH = testHH.insert(e3, e3.key, testHH);
         count++;
         testHH.displayMin();
         System.out.println("----------------------------------------------");
         //System.out.println("");
-        testHH = testHH.insert(new Node(), 0, testHH);
+        Node e4 = new Node(0);
+        testHH = testHH.insert(e4, e4.key, testHH);
         count++;
         testHH.displayMin();
         System.out.println("----------------------------------------------");
         //System.out.println("");
-        testHH = testHH.insert(new Node(), 7, testHH);
+        Node delNode = new Node(7);
+        testHH = testHH.insert(delNode, delNode.key, testHH);
         count++;
         testHH.displayMin();
         System.out.println("----------------------------------------------");
@@ -59,8 +63,20 @@ public class HollowHeapDriver {
         Node currMin = testHH.findMin(testHH);
         System.out.printf("The current minimum is %d\n", currMin.key);
         System.out.println("----------------------------------------------");
-
-
+        System.out.println("----------------------------------------------");
+        System.out.printf("There should be %d HollowNode(s) in the heap"
+        + " and there is(are) %d\n", count, testHH.getNumNodes());
+        testHH = testHH.delete(delNode, testHH);
+        count--;
+        System.out.printf("There should be %d HollowNode(s) in the heap"
+        + " and there is(are) %d\n", count, testHH.getNumNodes());
+        testHH = testHH.deleteMin(testHH);
+        count--;
+        System.out.printf("There should be %d HollowNode(s) in the heap"
+        + " and there is(are) %d\n", count, testHH.getNumNodes());
+        System.out.println("----------------------------------------------");
+        testHH = testHH.decreaseKey(e2, 1, testHH);
+        System.out.println(e2.key);
     }
 }
 

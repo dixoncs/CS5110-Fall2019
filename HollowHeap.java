@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Hollow Heap class.
  *
@@ -23,7 +26,7 @@ public class HollowHeap {
     private int maxRank;
     private HollowNode minH;
     private int numNodes;
-    private HollowNode arrayA[];   //full of roots indexed by rank (at most 1/rank)
+    private ArrayList<HollowNode> A = new ArrayList<HollowNode>();   //full of roots indexed by rank (at most 1/rank)
 
     /**
      * Constructor - makeHeap().
@@ -55,7 +58,6 @@ public class HollowHeap {
      */
     public HollowNode makeNode(Node e, int key) {
         HollowNode u = new HollowNode();
-        e = new Node(key);
         u.item = e;
         e.node = u;
         u.child = null;
@@ -146,9 +148,9 @@ public class HollowHeap {
      * @return a new heap 
      */
     public HollowHeap insert(Node e, int key, HollowHeap h) {
-        HollowHeap single = new HollowHeap(makeNode(e, key));
-        //numNodes++;
-        return meld(single, h);
+        HollowNode newNode = makeNode(e, key);
+        HollowHeap single = new HollowHeap(newNode);
+         return meld(single,h);
     }
 
     /**
@@ -160,8 +162,7 @@ public class HollowHeap {
      * @return a heap formed from h by changing the key of e to k
      */
     public HollowHeap decreaseKey(Node e, int key, HollowHeap h) {
-        HollowNode u = new HollowNode();
-        u = e.node;
+        HollowNode u = e.node;
         if (u == h.minH) {
             u.key = key;
             return h;
@@ -188,6 +189,7 @@ public class HollowHeap {
         return delete(minH.item, h);
     }
 
+
     /**
      * Deletes element from the hollow heap.
      *
@@ -196,26 +198,27 @@ public class HollowHeap {
      * @return h a thing
      */
     public HollowHeap delete(Node e, HollowHeap h) {
+        numNodes--;
+        getFullRoots(h);
         e.node.item = null;
         e.node = null;
-        if (minH.item != null) {
+        if (h.minH.item != null) {
             // Non-minimum deletion 
             return h;           
         }
         maxRank = 0;
-
         HollowNode w = new HollowNode();
         HollowNode v = new HollowNode();
         HollowNode u = new HollowNode();
         
         // While L not empty 
-        while (h != null) {
+        while (h.minH != null) {
             /*w = h.child;    //w = h.minH.child??
             v = h;          //v = h.minH??
             h = h.next;     //h.minH = h.minH.child.next??*/
             w = h.minH.child;
             v = h.minH;
-            h.minH = h.minH.child.next;
+            h.minH = h.minH.next;
             while (w != null) {
                 u = w;
                 w = w.next;
@@ -227,7 +230,7 @@ public class HollowHeap {
                     if (u.extraParent == null) {
 
                         // add u to L 
-                        u.next = h.minH.child;       
+                        u.next = h.minH;       
                         h.minH = u;
                     }
                     else {
@@ -245,26 +248,50 @@ public class HollowHeap {
                 }
                 else {
                     // u is full 
+                    getFullRoots(h);
                     doRankedLinks(u);
                 }
-                //destroy v;
+                destroy(v);
             }
         }
+        getFullRoots(h);
         doUnrankedLinks();
         return h;
     }
-
+    public void destroy(HollowNode v)
+    {
+        v.child = null;
+        v.extraParent = null;
+        v.item = null;
+        v.next = null;
+    }
+    public void getFullRoots(HollowHeap h)
+    {
+        HollowNode temp = h.minH;
+        while(temp != null)
+        {
+            if(temp.item != null)
+            {
+                A.add(temp);
+            }
+            temp = temp.next;
+        }
+    }
     /**
      * Does ranked links.
      * @param u a hollow node maybe?
      */
     public void doRankedLinks(HollowNode u) {
-        while (arrayA[u.rank] != null) {
-            u = link(u, arrayA[u.rank]);
-           arrayA[u.rank] = null;
+        while (u.rank != A.size() && A.get(u.rank) != null) {
+            u = link(u, A.get(u.rank));
+            A.set(u.rank, null);
             u.rank = u.rank + 1;
         }
-        arrayA[u.rank] = u;
+        u.rank = u.rank - 1;
+        if(u.rank > -1)
+        {
+            A.set(u.rank, u);
+        }
         if (u.rank > maxRank) {
             maxRank = u.rank;
         }
@@ -274,15 +301,15 @@ public class HollowHeap {
      * Does unranked links.
      */
     public void doUnrankedLinks() {
-        for (int i = 0; i < maxRank; i++) {
-            if (arrayA[i] != null) {
+        for (int i = 0; i <= maxRank; i++) {
+            if (A.get(i) != null) {
                 if (minH == null) {
-                    minH = arrayA[i];
+                    minH = A.get(i);
                 }
                 else {
-                    minH = link(minH, arrayA[i]);
+                    minH = link(minH, A.get(i));
                 }
-                arrayA[i] = null;
+                A.set(i, null);
             }
         }
     }

@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - HollowHeapDriver",
+            "request": "launch",
+            "mainClass": "HollowHeapDriver"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - FibonacciHeap",
             "request": "launch",
             "mainClass": "FibonacciHeap"
