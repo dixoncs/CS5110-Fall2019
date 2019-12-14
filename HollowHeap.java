@@ -212,7 +212,7 @@ public class HollowHeap {
         HollowNode u = new HollowNode();
         
         // While L not empty 
-        while (h.minH.child.next != null) {
+        while (h.minH != null) {
             /*w = h.child;    //w = h.minH.child??
             v = h;          //v = h.minH??
             h = h.next;     //h.minH = h.minH.child.next??*/
