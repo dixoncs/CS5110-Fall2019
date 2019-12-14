@@ -58,28 +58,29 @@ For the \textit{decreaseKey} and \textit{delete} results in the chart below, we 
 \end{center}
 \quad As you can see in the diagrams above, the methods for the two implementations are quite different. The Fibonacci Heap handles cascading cuts whereas the Hollow Heap avoids these cuts by using HollowNodes and lazy deletion. The Fibonacci Heap methods almost all have a void return type, but the Hollow Heap methods return either a Hollow Heap or a HollowNode. This difference lead to some creativity in method calls. There are differences in the node structures as well. The FibonacciNode has four pointers to keep track of the parent, child, left, and right FibonacciNodes as well as two integer fields and a boolean member. The first integer is for the key, the second is for the degree, and the boolean is to keep track of marked-ness. The HollowNode also has four pointers to node structures but only three are of type HollowNode. The item field is a pointer to a Node data type. There is still an integer type for the key and a rank fields which is consistent with the Fibonacci Heap fields. The Hollow Heap has a couple more methods than the Fibonacci Heap and this is because of the difference in the rebuilding process. Two-Parent Hollow Heaps are represented as a directed acyclic graph instead of a tree or set of trees like the Fibonacci Heap. Fibonacci Heaps and Hollow Heaps both have the same amortized runtime analysis. All of the classic heap methods run in $O(1)$ amortized time except \textit{decreaseKey} and \textit{delete}, which run in $O(\log n)$ amortized time for a $n$ element heap of height $O(\log n)$.\\
 
-The implementation of Hollow Heap based on the findings in the paper proved to be challenging to near impossible. This is due in most part to a few inconsistencies within the language used within the document. A majority of the confusion is in the pseudocode itself on pages 16 and 17. There are two h variables being used throughout. The first is in relation to an actual hollow heap itself. The second is to the minimum node in the heap called in implementation, minH. It takes serious reading of the paper to determine which is being referenced. We were unsure most of the time which to use. This lead to trouble in \textit{delete} and \textit{decreaseKey}. Second was the format of the pseudocode which lead to a failure when implementing delete when the node to delete was the minimum.  In the nested while loop , two closing brackets appear within an if statement that effectively closes off the logic. It is extremely unclear what is meant to occur. Our assumption of an if-else chain proved not to work. The two graphs demonstrate our success however. We implemented a Fibonacci Heap to run in comparison. We performed a range of insertions and deletions, each increasing in difficulty. The Hollow Heap Implementation easily outperformed the Fibonacci Heap implementation after the third round of insertions. Java forced a timeout and refused to run the insertions for one hundred and above. Fibonacci Heaps are well implemented too so we are sure our implementation is sound. Future work would include contacting the authors if the paper to determine if they implemented the structure themselves based on their paper. It is our determination that relying solely on the paper will not grant the results needed to implement the data structure successfully and soundly. The images below are results of testing using our programs. 
+The implementation of Hollow Heap based on the findings in the paper proved to be challenging to near impossible. This is due in most part to a few inconsistencies within the language used within the document. A majority of the confusion is in the pseudocode itself on pages 16 and 17. There are two h variables being used throughout. The first is in relation to an actual hollow heap itself. The second is to the minimum node in the heap called in implementation, minH. It takes serious reading of the paper to determine which is being referenced. We were unsure most of the time which to use. This lead to trouble in \textit{delete} and \textit{decreaseKey}. Second was the format of the pseudocode which lead to a failure when implementing \textit{delete} when the node to delete was the minimum.  In the nested while loop, two closing brackets appear within an if statement that effectively closes off the logic. It is extremely unclear what is meant to occur. Our assumption of an if-else chain proved not to work.\\
+
+\quad The two graphs demonstrate our success however. We implemented a Fibonacci Heap to run in comparison. We performed a range of insertions and deletions, each increasing in difficulty. The Hollow Heap Implementation easily outperformed the Fibonacci Heap implementation after the third round of insertions. Java forced a timeout and refused to run the insertions for one hundred and above. Fibonacci Heaps are well implemented too so we are sure our implementation is sound. Future work would include contacting the authors if the paper to determine if they implemented the structure themselves based on their paper. It is our determination that relying solely on the paper will not grant the results needed to implement the data structure successfully and soundly. The images below are results of testing using our programs. 
 
 \begin{center}
-	\includegraphics[scale=.5]{FibonacciHeap.png}\\
-	
+	\includegraphics[scale=.5]{FibonacciHeap.png}\\	
 \end{center}
 \begin{center}
 	\includegraphics[scale=.35]{image(1).png}\\
+\end{center}
+\begin{center}
+	\includegraphics[scale=.5]{HollowHeap.png}\\	
+\end{center}
+\begin{center}
+	\includegraphics[scale=.45]{image.png}\\	
+\end{center}
 
-\end{center}
-\begin{center}
-	\includegraphics[scale=.5]{HollowHeap.png}\\
-	
-\end{center}
-\begin{center}
-	\includegraphics[scale=.45]{image.png}\\
-	
-\end{center}
+\medskip
 
 \section{Conclusion}
 \quad Hollow Heaps are directed acyclic graphs that use lazy deletion and reinsertion to avoid cascading cuts and having to move children. Hollow Heaps use a HollowNode data structure that holds an item of a Node data type. Hollow Heaps have all the classic heap methods and these methods run in the same amortized time as the same methods in Fibonacci Heaps. We did not find a significant difference between Fibonacci Heaps and Hollow Heaps through side by side programmatic testing. In the future we would like to complete the implementation of Hollow Heaps so that we can run more extensive tests with larger data sets to determine if Hollow Heaps are in fact an improvement of Fibonacci Heaps as claimed by the authors. 
 
+\newpage
 \section{Figures}
 
 \medskip
@@ -92,7 +93,7 @@ The implementation of Hollow Heap based on the findings in the paper proved to b
 \medskip
 
 \begin{center}
-	\includegraphics[scale=.32]{fibonaccinode.png}\\
+	\includegraphics[scale=.3]{fibonaccinode.png}\\
 	FibonacciNode Class UML Diagram
 \end{center}
 
@@ -109,11 +110,10 @@ The implementation of Hollow Heap based on the findings in the paper proved to b
 	\includegraphics[]{make.png}\\
 	Makefile Targets
 \end{center}
-%\begin{center}
-%	\includegraphics[]{.png}
-%\end{center}
 
-\newpage
+\medskip
+
+%\newpage
 \nocite{*}
 \printbibliography
 
